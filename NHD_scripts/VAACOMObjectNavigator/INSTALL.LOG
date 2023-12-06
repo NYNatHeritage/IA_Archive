@@ -1,0 +1,22 @@
+***  Installation Started 04/24/2012 15:06  ***
+Title: NHDPlus COM Object Navigator Version 103 
+Source: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator.EXE
+Made Dir: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\UNWISE.EXE
+RegDB Key: Software\Microsoft\Windows\CurrentVersion\Uninstall\NHDPlus COM Object Navigator Version 103
+RegDB Val: NHDPlus COM Object Navigator Version 103
+RegDB Name: DisplayName
+RegDB Root: 2
+RegDB Old: NHDPlus COM Object Navigator Version 103
+RegDB Key: Software\Microsoft\Windows\CurrentVersion\Uninstall\NHDPlus COM Object Navigator Version 103
+RegDB Val: C:\_Schmid\_project\IMPORT~1\GEO_SC~1\NHD_SC~1\VAACOM~2\UNWISE.EXE C:\_Schmid\_project\IMPORT~1\GEO_SC~1\NHD_SC~1\VAACOM~2\INSTALL.LOG
+RegDB Name: UninstallString
+RegDB Root: 2
+RegDB Old: C:\NHDPLU~1\VAACOM~1\UNWISE.EXE C:\NHDPLU~1\VAACOM~1\INSTALL.LOG
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\VAANavToolbarCOM.dll
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\VAANavigatorCOM.dll
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\ComputeFromTo.dll
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\TNavWorkSkel.mdb
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\TFromToSkel.DBF
+File Copy: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\NHDVAANAV.HLP
+Self-Register: C:\_Schmid\_project\Important_Areas\geo_scripts\NHD_scripts\VAACOMObjectNavigator\VAANavigatorCOM.dll
