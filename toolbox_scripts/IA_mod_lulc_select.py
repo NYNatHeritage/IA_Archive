@@ -76,14 +76,14 @@ def CCAP_select(in_features, CCAP_select, LULC, WSP, CCAP_Select_Query):
 def NWI_polys(in_features, NWI_select, WSP):  
     
     # Selecting NWI Wetland polys
-    arcpy.MakeFeatureLayer_management("M:\\gis_util\\connectfiles\\gisview@gisprod_default_10.0.sde\\SDEADMIN.nc_nwi_poly_2016", "LAYER_NWI_P")
+    arcpy.MakeFeatureLayer_management("M:\\gis_util\\connectfiles\\gisviewer@decgsp_default_10.3.sde\\GISCREATOR.nc_nwi_poly_2023", "LAYER_NWI_P")
     arcpy.SelectLayerByLocation_management("LAYER_NWI_P", "INTERSECT", in_features, "", "NEW_SELECTION")
     arcpy.CopyFeatures_management ("LAYER_NWI_P", NWI_select)
 
 def NWI_lines(in_features, NWI_select_lines, WSP):  
     
     # Selecting NWI Wetland polys
-    arcpy.MakeFeatureLayer_management("M:\\gis_util\\connectfiles\\gisview@gisprod_default_10.0.sde\\SDEADMIN.nc_nwi_line2008", "LAYER_NWI_L")
+    arcpy.MakeFeatureLayer_management("M:\\gis_util\\connectfiles\\gisviewer@decgsp_default_10.3.sde\\GISCREATOR.nc_nwi_line2008", "LAYER_NWI_L")
     arcpy.SelectLayerByLocation_management("LAYER_NWI_L", "INTERSECT", in_features, "", "NEW_SELECTION")
     arcpy.CopyFeatures_management ("LAYER_NWI_L", NWI_select_lines)
 
@@ -91,7 +91,7 @@ def NWI_lines(in_features, NWI_select_lines, WSP):
 def DEC_wetlands(in_features, DEC_wetlands, WSP):  
     arcpy.AddMessage("DEC Wetlands in....")
     # Selecting DEC Wetlands
-    arcpy.MakeFeatureLayer_management("M:\\gis_util\\connectfiles\\gisview@gisprod_default_10.0.sde\\ARCS.fwwetpol_reguwet", "LAYER_DECW", "", "", "")
+    arcpy.MakeFeatureLayer_management("M:\\gis_util\\connectfiles\\gisviewer@decgsp_default_10.3.sde\\GISCREATOR.fwwetpol_reguwet", "LAYER_DECW", "", "", "")
     arcpy.SelectLayerByLocation_management("LAYER_DECW", "INTERSECT", in_features, "", "NEW_SELECTION")
     arcpy.FeatureToPolygon_management("LAYER_DECW", "DECWmp", "", "ATTRIBUTES", "")
     arcpy.MultipartToSinglepart_management("DECWmp", "DECWsp")
