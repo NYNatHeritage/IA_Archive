@@ -8,18 +8,19 @@
 # ---------------------------------------------------------------------------
 
 # Import system modules
-import sys, string, os, win32com.client, arcpy
+import sys, string, os,  arcpy
 
 # Check out any necessary licenses
 from arcpy.sa import *
 arcpy.CheckOutExtension("Spatial")
 import arcpy.cartography as CA
-#arcpy.env.snapRaster = "W:/GIS_Data/SnapRasters/snapras30met"
-arcpy.env.snapRaster ="F:\\_Schmid\\_GIS_Data\\SnapRasters\\snapras30met" 
+arcpy.env.snapRaster = "W:/GIS_Data/SnapRasters/snapras30met"
+#arcpy.env.snapRaster ="F:\\_Schmid\\_GIS_Data\\SnapRasters\\snapras30met" 
 
 # Workspace
 #arcpy.env.workspace  = "C:/_Schmid/_project/Important_Areas/GIS_Data/SCRATCH.gdb"
-arcpy.env.workspace = "D:\\Git_Repos\\scratch.gdb"  #2017 update path
+#arcpy.env.workspace = "D:\\Git_Repos\\scratch.gdb"  #2017 update path
+arcpy.env.workspace ="H:/Please_Do_Not_Delete_me/Important_Areas/scratch2023.gdb"
 WSP = arcpy.env.workspace
 arcpy.env.overwriteOutput = True
 
@@ -150,7 +151,8 @@ def ALCSLP_PALmodule(in_buff, in_buff_ring, out_buff, WSP, value_field, cell_siz
     arcpy.AddMessage("Create a binary raster buffer 'ring'...")
     arcpy.FeatureToRaster_conversion("ringvar2", value_field, "ringvar2_rast", cell_size)
     arcpy.gp.Int_sa("ringvar2_rast", "rvar2_int")
-    rvar2_buff = Con("rvar2_int", "1", "0", "VALUE > 0")
+    #rvar2_buff = Con("rvar2_int", "1", "0", "VALUE > 0")
+    rvar2_buff = Con(Raster("rvar2_int") > 0, 1, 0)
     rvar2_buff.save("rvar2_buff")   
 
     
@@ -161,7 +163,7 @@ def ALCSLP_PALmodule(in_buff, in_buff_ring, out_buff, WSP, value_field, cell_siz
     arcpy.AddMessage("Give buffer 'ring' LU values, export to vector...")
 
     arcpy.env.cellSize = cell_size
-    ccap_buff = Times("rvar2_buff", "W:/GIS_Data/LU_LC/ccap/2006/ccap_ne_2006")
+    ccap_buff = Times("rvar2_buff", "H:/Please_Do_Not_Delete_me/Important_Areas/HRE_2016_ccap_corrected.tif") ##2023 changed from ne_2006
     ccap_buff.save("ccap_buff")
     
     #   Reclassify LU values: Forested equals 2 (tomultiply the 2.0 coefficient in the methodology,
@@ -225,7 +227,8 @@ def ALCSLP_PALmodule(in_buff, in_buff_ring, out_buff, WSP, value_field, cell_siz
 
     arcpy.env.cellSize = cell_size
     arcpy.FeatureToRaster_conversion(in_buff,  value_field, "in_buff_rast", cell_size)
-    buff_shed = Watershed("F:/_Schmid/_GIS_Data/flow_dir/state_fldir", "in_buff_rast")
+    #buff_shed = Watershed("F:/_Schmid/_GIS_Data/flow_dir/state_fldir", "in_buff_rast")
+    buff_shed = Watershed("H:/Please_Do_Not_Delete_me/_Schmid/_GIS_Data/flow_dir/state_fldir", "in_buff_rast") #Update path to Schmidt archive for 2023
     buff_shed.save("buff_shed")
 
     # Calculate the slope of this watershed area, w/ conditional statement
@@ -235,7 +238,9 @@ def ALCSLP_PALmodule(in_buff, in_buff_ring, out_buff, WSP, value_field, cell_siz
     buff_shed_int.save("buff_shed_int")
     buff_shed_binary = Con("buff_shed_int", "1", "0", "VALUE > 0")
     buff_shed_binary.save("buff_shed_binary")   
-    slope_buff = Times("buff_shed_binary", "F:\_Schmid\_GIS_Data/slope/st30slp_pr")
+    #slope_buff = Times("buff_shed_binary", "F:\_Schmid\_GIS_Data/slope/st30slp_pr")
+    slope_buff = Times("buff_shed_binary", "H:/Please_Do_Not_Delete_me/_Schmid/_GIS_Data/slope/st30slp_pr")
+    
     slope_buff.save("slope_buff")
 
 
@@ -245,7 +250,8 @@ def ALCSLP_PALmodule(in_buff, in_buff_ring, out_buff, WSP, value_field, cell_siz
     # Assess the cover type and slope
     arcpy.AddMessage("Assess Cover Type with Slope")
     
-    LC_raster = Con("ccap_recl", "F:/_Schmid/_project/Important_Areas/GIS_Data/soils/ssurgo2_FinalKFact.gdb/NYS_s2_EroHzd_2012_June", "ccap_recl", "VALUE = 1")
+    #LC_raster = Con("ccap_recl", "F:/_Schmid/_project/Important_Areas/GIS_Data/soils/ssurgo2_FinalKFact.gdb/NYS_s2_EroHzd_2012_June", "ccap_recl", "VALUE = 1")
+    LC_raster = Con("ccap_recl", "H:/Please_Do_Not_Delete_me/_Schmid/Important_Areas/GIS_Data/soils/ssurgo2_FinalKFact.gdb/NYS_s2_EroHzd_2012_June", "ccap_recl", "VALUE = 1") #Update path to Schmidt archive for 2023
     LC_raster.save("LC_raster")
 
     cover_slope = Times("LC_raster", "slope_buff")

@@ -14,11 +14,11 @@ import sys, string, os, arcpy
 from arcpy.sa import *
 arcpy.CheckOutExtension("Spatial")
 import arcpy.cartography as CA
-#arcpy.env.snapRaster = "W:/GIS_Data/SnapRasters/snapras30met"
-arcpy.env.snapRaster ="F:\\_Schmid\\_GIS_Data\\SnapRasters\\snapras30met" 
+arcpy.env.snapRaster = "W:/GIS_Data/SnapRasters/snapras30met"
+#arcpy.env.snapRaster ="F:\\_Schmid\\_GIS_Data\\SnapRasters\\snapras30met" 
 # Workspace
 #arcpy.env.workspace  = "C:/_Schmid/_project/Important_Areas/GIS_Data/SCRATCH.gdb"
-arcpy.env.workspace = "D:\\Git_Repos\\scratch.gdb"  #2017 update path
+#arcpy.env.workspace = "D:\\Git_Repos\\scratch.gdb"  #2017 update path
 # Load required toolboxes...
 arcpy.env.overwriteOutput = True
 
