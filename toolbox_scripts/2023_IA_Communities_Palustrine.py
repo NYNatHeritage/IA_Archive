@@ -27,14 +27,24 @@ arcpy.env.workspace = "H:/Please_Do_Not_Delete_me/Important_Areas/scratch2023.gd
 WSP = arcpy.env.workspace
 arcpy.env.overwriteOutput = True
 
-ModelType = "Communities_Palustrine"
+ModelType = "Communities_Palustrine_road_crossings_100_"
 #in_put = arcpy.GetParameterAsText(0)
 #in_put= "D:\\Git_Repos\\IA_geoprocessing_scripts\\EOs_test_for_scripts.gdb\\EOs_test_for_scripts_sample"
-in_put="H:\\_Conley_Backup\\D_Git\\IA_geoprocessing_scripts\\EOs_test_for_scripts.gdb\\EOs_test_for_scripts"
+#in_put="H:\\_Conley_Backup\\D_Git\\IA_geoprocessing_scripts\\EOs_test_for_scripts.gdb\\EOs_test_for_scripts"
+#in_put="W:\\Projects\\HREP\\AmphibianRoadCrossing\\GIS\\For Amy\\HREP Hotspots.gdb\\main_road_crossings_300m_buffers"
+#in_put="H:\\Please_Do_Not_Delete_me\\Important_Areas\\scratch2023.gdb\\main_road_crossings_300m_buffers"
+#in_put="W:\\Projects\\HREP\\AmphibianRoadCrossing\\GIS\\For Amy\\HREP Hotspots.gdb\\TC50buffers_15Dec23"
+in_put="W:\\Projects\\HREP\\AmphibianRoadCrossing\\GIS\\For Amy\\HREP Hotspots.gdb\\TC100_buffers_15Dec23"
+
+##Add the model field to the input
+
+arcpy.AddField_management(in_put,field_name="IA_MODEL",field_type="TEXT")
+expression="03EPAL_G01"
+arcpy.CalculateField_management(in_put,"IA_MODEL",repr(expression),"PYTHON")
 ##EXorHIST = arcpy.GetParameterAsText(1)
 EXorHIST = "Extant"
 ##tyme = arcpy.GetParameterAsText(2)
-tyme="12_07_2023"
+tyme="12_15_2023"
 ##Proj = arcpy.GetParameterAsText(3)
 Proj = "HREP"
 
@@ -46,9 +56,10 @@ CCAP_Select_Query = "VALUE = 13 OR VALUE = 14 OR VALUE = 15 OR VALUE = 22"
 #FinalFC = "D:\\Git_Repos\\IA_geoprocessing_scripts\\OUTPUT.gdb\\" + ModelType + tyme + EXorHIST
 
 if EXorHIST == "Extant":
-    selectQuery = "IA_MODEL = '01EALL_NOB'" ##Changed the code for 2023 testing to the RAPWINCA code since no Pal Comm in old sample
-    #IAmodel = "03EPAL_G01"
-    IAmodel ="01EALL_NOB"
+    #selectQuery = "IA_MODEL = '01EPAL_LTS'" ##Changed the code for 2023 testing to the RAPWINCA code since no Pal Comm in old sample
+    #IAmodel ="01EPAL_LTS"  #test data to get eos, don't use
+    selectQuery = "IA_MODEL = '03EPAL_G01'"
+    IAmodel = "03EPAL_G01"
 elif EXorHIST == "Historical":
     selectQuery = "IA_MODEL = 'XXXXX'"
     IAmodel = "XXXXX"
@@ -131,7 +142,7 @@ arcpy.EliminatePolygonPart_management("Dissolve2", "Elim", "AREA", 3000)
 
 ################### WRAP UP
 ################### 
-FinalFC= "H:\\Please_Do_Not_Delete_me\\\Important_Areas" + ModelType + tyme + EXorHIST + ".shp"
+FinalFC= "H:\\Please_Do_Not_Delete_me\\\Important_Areas\\" + ModelType + tyme + EXorHIST + ".shp"
 FinalFC_gdb="H:\\Please_Do_Not_Delete_me\\\Important_Areas\\OUTPUT.gdb\\" + ModelType + tyme + EXorHIST
 
 
@@ -144,4 +155,4 @@ print("IA model done: Palustrine Communities.")
 
 
 
-
+ 
